@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script> 
+<script>
+$(document).ready(function () {
+
+    $.ajax({
+        type: "GET",
+        url: "Data.csv",
+        dataType: "text",
+        success: function (data) { processData(data); }
+    });
+
+    function processData(allText) {
+        var allLinesArray = allText.split('\n');
+        if (allLinesArray.length > 0) {
+            var dataPoints = [];
+            for (var i = 0; i <= allLinesArray.length - 1; i++) {
+	        var rowData = allLinesArray[i].split(';');
+	        if(rowData && rowData.length > 1 && rowData[2] == 'yes')
+	            dataPoints.push({ x: new Date(rowData[0]), y: parseInt(rowData[1]) });
+            }
+            chart.options.data[0].dataPoints = dataPoints;
+            chart.render();
+        }
+    }
+
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Line chart with the data from CSV"
+	},
+	axisY:{
+		title: "Percentage",
+		includeZero: false
+	},
+	toolTip: {
+		shared: true
+	},
+	data: [{        
+		type: "line", 
+		name: "Yes",	
+		showInLegend: true,		
+		
+	}]
+});
+chart.render();
+
+});
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

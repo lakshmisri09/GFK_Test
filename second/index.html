@@ -1,0 +1,42 @@
+<html>
+<body>
+<h3>Details of the Child Class:</h3>
+<div id="childDetails"></div>
+
+<h3>Details of the Parent Class:</h3>
+<div id="parentDetails"></div>
+
+<h4> Parent Instance value :</h4>
+<span id="parentInstance"></span>
+
+<h4>Child Instance value :</h4>
+<span id="childInstance"></span>
+
+
+<script type="text/javascript">
+//Create a class with one method
+class Parent {
+    getDescription() {
+        document.getElementById("parentDetails").innerHTML =  "I am a Parent of a child!";
+    }
+}
+//Create sub class which extends previous class
+class Child extends Parent {
+    getDetails() {
+        document.getElementById("childDetails").innerHTML =  "I am a child of a parent";
+    }
+
+}
+//Create object for sub class
+var myChild = new Child();
+ myChild.getDetails();
+ myChild.getDescription();
+
+
+// check inheritance
+document.getElementById("parentInstance").innerHTML = (myChild instanceof Parent); // true 
+document.getElementById("childInstance").innerHTML = (myChild instanceof Child); // true
+
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#retrieveData").click(function(){
+		//Ajax call to fetch the values from urls
+        $.when( $.ajax( "https://cdn.gfkdaphne.com/tests/async.php?a=1" ), $.ajax( "https://cdn.gfkdaphne.com/tests/async.php?a=2" ) ).done(function( a1, a2 ) {
+			if(a1[0] != "" || a2[0] !="")
+				$("#response").html(a1[0] +"  "+a2[0]);
+		});
+    });
+
+});
+</script>
+<style type="text/css">
+
+.marginToDiv{
+	padding:10px;
+	background:#f1f1f1;
+	width:200px;
+	height:100px;
+	color:#0000FF;
+}
+</style>
+</head>
+<body>
+
+<button id="retrieveData" value="FetchDetails" >Multiple Request Response</button>
+
+<div id="response" class="marginToDiv"></div>
+
+</body>
+</html>
